@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <title>Covid Center Website</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/style.css">
     </head>
 
     <body>
@@ -14,7 +15,7 @@
         <section>
             <h2 class="alert alert-info">Please fill out this form:</h2>
             <article>
-                <form>
+                <form onsubmit="return validateForm()" id="mainForm" novalidate>
                     <fieldset class="border">
                         <legend class="w-auto">Part 1: Patient Information</legend>
                         <div class="form-group row">
@@ -97,6 +98,7 @@
                             </label>
                             <div class="col-sm-10">
                                 <input type="date" id="txtDOB" name="textDOB" required class="form-control" placeholder="Date of birth">
+                                <div id="divDoBError" class="invisible errorMessage"></div>
                             </div>
                         </div>
 
@@ -274,17 +276,20 @@
                                 Have you travelled to any country in the last 14 days?
                             </label>
                             <div>
-                                <select id="ddCountry" name="ddCountry" class="form-control">
+                                <select id="ddCountry" name="ddCountry" class="form-control" onchange="updateCountryView()">
                                     <option value="No" selected>No</option>
                                     <option value="Yes">Yes</option>
                                 </select>
                             </div>
-                            
+                        </div>
+
+                        <div id="divCountry" class="row form-group invisible">
                             <label for="txtCountry" class="col-sm-3 col-form-label">
                                 Which countries? (separate with commas)
                             </label>
-                            <div class="col">
+                            <div>
                                 <input type="text" id="txtCountry" name="txtCountry" required class="form-control" placeholder="Countries">
+                                <div id="divCountryError" class="invisible errorMessage">You must enter at least one country.</div>
                             </div>
                         </div>
 
@@ -310,6 +315,10 @@
                         </div>
                     </fieldset>
 
+                    <div id="divCharError" class="invisible alert alert-danger" role="alert">
+                        Invalid character has been entered.
+                    </div>
+
                     <p>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="reset" class="btn btn-secondary">Reset</button>
@@ -322,5 +331,6 @@
         </footer>
 
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>
